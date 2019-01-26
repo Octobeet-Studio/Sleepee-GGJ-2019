@@ -89,6 +89,7 @@ public class PlayerControllerLinear : MonoBehaviour
             if (isStop)
             {
                 StopCoroutine(charge());
+                currentAccelleration = accelleration;
                 if (Ischarge)
                 {
                     Debug.Log("Super carica");
@@ -107,7 +108,7 @@ public class PlayerControllerLinear : MonoBehaviour
             visionConeController.CloseCone();
 
 
-        if (rb.velocity.magnitude == 0 && isStop)
+        if (rb.velocity.magnitude <= 0.2 && isStop)
         {
             if (!isCharging)
                 StartCoroutine(charge());
@@ -153,7 +154,7 @@ public class PlayerControllerLinear : MonoBehaviour
 
     private void HandleAnimation()
     {
-        if (rb.velocity.magnitude < 0.3)
+        if (rb.velocity.magnitude < 0.2)
         {
             anim.SetBool("Horizontal", false);
             anim.SetBool("Down", false);
