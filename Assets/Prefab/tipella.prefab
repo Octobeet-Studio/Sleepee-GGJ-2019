@@ -99,6 +99,8 @@ MonoBehaviour:
     m_Asset: {fileID: 11400000, guid: 5e28e9c2bf62d3a42854d85d5b5c6699, type: 3}
   accelleration: 2
   rotationSpeed: 0.05
+  chargeTimer: 4
+  chargePower: 50
   maxSpeed: 8
   ObstaclesAudio: {fileID: 0}
   visionConeController: {fileID: 147860962113189115}
@@ -153,16 +155,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LightSources
-      objectReference: {fileID: 0}
-    - target: {fileID: 147860962145809190, guid: 3b26e64fc8542f046a4c0be152645adb,
-        type: 3}
-      propertyPath: minAngle
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 147860962145809190, guid: 3b26e64fc8542f046a4c0be152645adb,
-        type: 3}
-      propertyPath: maxAngle
-      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 1527964759130884129, guid: 3b26e64fc8542f046a4c0be152645adb,
         type: 3}
@@ -238,6 +230,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SpotAngle
       value: 72.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 147860962145809190, guid: 3b26e64fc8542f046a4c0be152645adb,
+        type: 3}
+      propertyPath: minAngle
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 147860962145809190, guid: 3b26e64fc8542f046a4c0be152645adb,
+        type: 3}
+      propertyPath: maxAngle
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b26e64fc8542f046a4c0be152645adb, type: 3}

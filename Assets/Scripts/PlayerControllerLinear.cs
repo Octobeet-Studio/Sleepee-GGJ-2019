@@ -13,8 +13,12 @@ public class PlayerControllerLinear : MonoBehaviour
     [Range(0, 1)]
     [SerializeField]
     float rotationSpeed;
+    [SerializeField]
+    float chargeTimer;
+    [SerializeField]
+    float chargePower;
 
-    float currenAccelleration;
+    float currentAccelleration;
 
     public float maxSpeed;
     Rigidbody2D rb;
@@ -25,7 +29,7 @@ public class PlayerControllerLinear : MonoBehaviour
 
     Vector2 direction;
 
-    bool stop1bool, stop2bool;
+    bool stop1bool, stop2bool, isStop, Ischarge, isCharging;
 
     private void Awake()
     {
@@ -38,12 +42,12 @@ public class PlayerControllerLinear : MonoBehaviour
         input.Player.Movement.performed += ctx => setDirection(ctx.ReadValue<Vector2>());
         input.Player.Stop1.performed += ctx => stop1(ctx.ReadValue<float>());
         input.Player.Stop2.performed += ctx => stop2(ctx.ReadValue<float>());
-        currenAccelleration = accelleration;
+        currentAccelleration = accelleration;
     }
 
     void stop1(float axis)
     {
-        if (axis > 0.8f)
+        if (axis > 0.5f)
             stop1bool = true;
         else
             stop1bool = false;
@@ -51,40 +55,76 @@ public class PlayerControllerLinear : MonoBehaviour
 
     void stop2(float axis)
     {
-        if (axis > 0.8f)
+        if (axis > 0.5f)
+        {
             stop2bool = true;
+        }
         else
+        {
             stop2bool = false;
+        }
     }
 
     private void Update()
     {
         HandleAnimation();
-        visionConeController.SetDirection(rb.velocity.normalized);
+        visionConeController.SetDirection(direction.normalized);
     }
 
     private void FixedUpdate()
     {
-        rb.AddForce(currenAccelleration * direction);
+        rb.AddForce(currentAccelleration * direction);
 
         if (stop1bool && stop2bool)
         {
-            currenAccelleration = 0;
+            if (!isStop)
+            {
+                currentAccelleration = 0;
+                isStop = true;
+            }
         }
         else
-            currenAccelleration = accelleration;
-
-        if (direction.x < 0.1f && direction.x > -0.1f && direction.y < 0.1f && direction.y > -0.1f)
         {
-            if (visionConeController != null)
-                visionConeController.OpenCone();
+            if (isStop)
+            {
+                isCharging = false;
+                StopCoroutine(charge());
+                if (Ischarge)
+                {
+                    Debug.Log("Super carica");
+                    rb.AddForce(chargePower * direction.normalized);
+                    Ischarge = false;
+                }
+                currentAccelleration = accelleration;
+                isStop = false;
+            }
         }
 
+        if (rb.velocity.magnitude <= Vector2.one.magnitude * 0.1f)
+            visionConeController.OpenCone();
+        else
+            visionConeController.CloseCone();
+
+
+        if (rb.velocity.magnitude == 0 && isStop)
+        {
+            if (!isCharging)
+                StartCoroutine(charge());
+        }
 
         if (rb.velocity.magnitude >= maxSpeed)
         {
             rb.velocity = rb.velocity * maxSpeed / rb.velocity.magnitude;
         }
+    }
+
+    IEnumerator charge()
+    {
+        isCharging = true;
+        Debug.Log("caricando");
+        yield return new WaitForSeconds(chargeTimer);
+        Ischarge = true;
+        Debug.Log("Carica pronta");
     }
 
     void setDirection(Vector2 _direction)
@@ -145,4 +185,5 @@ public class PlayerControllerLinear : MonoBehaviour
             anim.SetBool("Idle", false);
         }
     }
+
 }
