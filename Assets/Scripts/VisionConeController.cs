@@ -28,6 +28,11 @@ public class VisionConeController : MonoBehaviour
         state = State.idle;
     }
 
+    public void SetDirection(Vector2 direction)
+    {
+        transform.rotation = Quaternion.Euler(direction.x, direction.y, 0);
+    }
+
     public void OpenCone()
     {
         if (state == State.idle)

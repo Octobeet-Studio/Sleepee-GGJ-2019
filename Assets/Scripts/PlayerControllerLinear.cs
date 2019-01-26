@@ -18,6 +18,7 @@ public class PlayerControllerLinear : MonoBehaviour
 
     public float maxSpeed;
     Rigidbody2D rb;
+    Animator anim;
 
     public AudioSource ObstaclesAudio;
     public VisionConeController visionConeController;
@@ -27,6 +28,7 @@ public class PlayerControllerLinear : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     private void Start()
@@ -46,7 +48,7 @@ public class PlayerControllerLinear : MonoBehaviour
 
     private void Update()
     {
-        
+        HandleAnimation();
     }
 
     private void FixedUpdate()
@@ -74,6 +76,10 @@ public class PlayerControllerLinear : MonoBehaviour
             direction = Vector2.Lerp(direction, _direction, rotationSpeed);
             //if (_direction.x > 0.6f || _direction.x < -0.6f || _direction.y > 0.6f || _direction.y < -0.6f)
         }
+        else
+        {
+            direction = rb.velocity.normalized;
+        }
     }
 
     private void OnEnable()
@@ -84,5 +90,41 @@ public class PlayerControllerLinear : MonoBehaviour
     private void OnDisable()
     {
         input.Disable();
+    }
+
+    private void HandleAnimation()
+    {
+        if (rb.velocity.magnitude < 0.3)
+        {
+            anim.SetBool("Horizontal", false);
+            anim.SetBool("Down", false);
+            anim.SetBool("Up", false);
+            anim.SetBool("Idle", true);
+        }
+        else if (Mathf.Abs(rb.velocity.x) > Mathf.Abs(rb.velocity.y))
+        {
+            anim.SetBool("Horizontal", true);
+            anim.SetBool("Down", false);
+            anim.SetBool("Up", false);
+            anim.SetBool("Idle", false);
+            if (rb.velocity.x < 0)
+                transform.localScale = new Vector3(-1, 1, 1);
+            else
+                transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (rb.velocity.y > 0)
+        {
+            anim.SetBool("Horizontal", false);
+            anim.SetBool("Down", false);
+            anim.SetBool("Up", true);
+            anim.SetBool("Idle", false);
+        }
+        else
+        {
+            anim.SetBool("Horizontal", false);
+            anim.SetBool("Down", true);
+            anim.SetBool("Up", false);
+            anim.SetBool("Idle", false);
+        }
     }
 }
