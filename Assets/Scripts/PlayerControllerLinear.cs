@@ -195,7 +195,8 @@ public class PlayerControllerLinear : MonoBehaviour
         Vector2 bounce = collision.GetContact(0).normal;
         bounce *= bounceDistance;
         transform.position = new Vector3(transform.position.x + bounce.x, transform.position.y + bounce.y, transform.position.z);
-        currentAccelleration = accelleration;
+        if (!(stop1bool && stop2bool))
+            currentAccelleration = accelleration;
         direction = Vector2.zero;
     }
 
