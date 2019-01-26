@@ -101,7 +101,7 @@ MonoBehaviour:
   rotationSpeed: 0.05
   maxSpeed: 8
   ObstaclesAudio: {fileID: 0}
-  visionConeController: {fileID: 0}
+  visionConeController: {fileID: 147860962113189115}
 --- !u!50 &8879947859834745196
 Rigidbody2D:
   serializedVersion: 4
@@ -182,12 +182,12 @@ PrefabInstance:
     - target: {fileID: 1527964759130884129, guid: 3b26e64fc8542f046a4c0be152645adb,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 1527964759130884129, guid: 3b26e64fc8542f046a4c0be152645adb,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 1527964759130884129, guid: 3b26e64fc8542f046a4c0be152645adb,
         type: 3}
@@ -207,7 +207,27 @@ PrefabInstance:
     - target: {fileID: 1527964759130884129, guid: 3b26e64fc8542f046a4c0be152645adb,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 147860960950527849, guid: 3b26e64fc8542f046a4c0be152645adb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 147860960950527849, guid: 3b26e64fc8542f046a4c0be152645adb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 147860962145809184, guid: 3b26e64fc8542f046a4c0be152645adb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 147860960950527848, guid: 3b26e64fc8542f046a4c0be152645adb,
+        type: 3}
+      propertyPath: m_SpotAngle
+      value: 72.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b26e64fc8542f046a4c0be152645adb, type: 3}
@@ -217,3 +237,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 104744925}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &147860962113189115 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 147860962145809190, guid: 3b26e64fc8542f046a4c0be152645adb,
+    type: 3}
+  m_PrefabInstance: {fileID: 104744925}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83f7243a9dbcb7347a9e4d3239189364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -11,6 +11,7 @@ public class VisionConeController : MonoBehaviour
     public float openDelay;
     public float closeDelay;
     private Light spotLight;
+    private Quaternion initialRotation;
 
     enum State
     {
@@ -26,11 +27,13 @@ public class VisionConeController : MonoBehaviour
     {
         spotLight = GetComponent<Light>();  
         state = State.idle;
+        initialRotation = transform.rotation;
     }
 
     public void SetDirection(Vector2 direction)
     {
-        transform.rotation = Quaternion.Euler(direction.x, direction.y, 0);
+        transform.rotation = initialRotation * Quaternion.Euler(0, Mathf.Atan2(direction.y, direction.x) * 180 / Mathf.PI, 0);
+
     }
 
     public void OpenCone()
