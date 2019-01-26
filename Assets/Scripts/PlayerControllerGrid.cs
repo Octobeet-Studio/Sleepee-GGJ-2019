@@ -6,7 +6,7 @@ public class PlayerControllerGrid : MonoBehaviour
 {
     public float gridSize;
     public float speed;
-
+    public VisionConeController visionConeController;
     bool moving = false;
     // Start is called before the first frame update
     void Start()
@@ -63,5 +63,6 @@ public class PlayerControllerGrid : MonoBehaviour
             yield return null;
         }
         moving = false;
+        visionConeController.OpenCone();
     }
 }

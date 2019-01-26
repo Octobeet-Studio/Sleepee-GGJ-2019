@@ -13,6 +13,7 @@ public class PlayerControllerLinear : MonoBehaviour
     float speed;
 
     public AudioSource ObstaclesAudio;
+    public VisionConeController visionConeController;
 
     private void Update()
     {
@@ -29,5 +30,8 @@ public class PlayerControllerLinear : MonoBehaviour
 
         if (Input.GetKey(down))
             transform.position += Vector3.down * speed;
+
+        if (Input.GetKeyUp(left) || Input.GetKeyUp(right) || Input.GetKeyUp(up) || Input.GetKeyUp(down))
+            visionConeController.OpenCone();
     }
 }
