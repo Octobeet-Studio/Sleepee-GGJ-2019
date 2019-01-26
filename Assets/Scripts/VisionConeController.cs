@@ -6,8 +6,10 @@ public class VisionConeController : MonoBehaviour
 {
     public float openSpeed;
     public float closeSpeed;
-    public float maxRange;
     public float minRange;
+    public float maxRange;
+    public float minAngle;
+    public float maxAngle;
     public float openDelay;
     public float closeDelay;
     private Light spotLight;
@@ -27,17 +29,21 @@ public class VisionConeController : MonoBehaviour
     {
         spotLight = GetComponent<Light>();  
         state = State.idle;
-        initialRotation = transform.rotation;
+        initialRotation = transform.parent.rotation;
+        gameObject.SetActive(false);
     }
 
     public void SetDirection(Vector2 direction)
     {
-        transform.rotation = initialRotation * Quaternion.Euler(0, Mathf.Atan2(direction.y, direction.x) * 180 / Mathf.PI, 0);
-
+        transform.parent.rotation = initialRotation * Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * 180 / Mathf.PI);
     }
 
     public void OpenCone()
     {
+        if (!gameObject.activeSelf)
+        {
+            gameObject.SetActive(true);
+        }
         if (state == State.idle)
         {
             state = State.opening;
@@ -62,10 +68,9 @@ public class VisionConeController : MonoBehaviour
         {
             t += openSpeed * Time.deltaTime;
             spotLight.range = Mathf.Lerp(minRange, maxRange, t);
+            spotLight.spotAngle = Mathf.Lerp(minAngle, maxAngle, t);
             yield return null;
         }
-        yield return new WaitForSeconds(closeDelay);
-        CloseCone();
     }
 
     IEnumerator CloseConeCoroutine()
@@ -76,8 +81,10 @@ public class VisionConeController : MonoBehaviour
         {
             t += closeSpeed * Time.deltaTime;
             spotLight.range = Mathf.Lerp(initialRange, minRange, t);
+            spotLight.spotAngle = Mathf.Lerp(maxAngle, minAngle, t);
             yield return null;
         }
         state = State.idle;
+        gameObject.SetActive(false);
     }
 }

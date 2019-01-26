@@ -154,6 +154,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightSources
       objectReference: {fileID: 0}
+    - target: {fileID: 147860962145809190, guid: 3b26e64fc8542f046a4c0be152645adb,
+        type: 3}
+      propertyPath: minAngle
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 147860962145809190, guid: 3b26e64fc8542f046a4c0be152645adb,
+        type: 3}
+      propertyPath: maxAngle
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 1527964759130884129, guid: 3b26e64fc8542f046a4c0be152645adb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -213,6 +223,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 147860962145809184, guid: 3b26e64fc8542f046a4c0be152645adb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 147860962145809184, guid: 3b26e64fc8542f046a4c0be152645adb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.66
       objectReference: {fileID: 0}
     - target: {fileID: 147860960950527848, guid: 3b26e64fc8542f046a4c0be152645adb,
         type: 3}
