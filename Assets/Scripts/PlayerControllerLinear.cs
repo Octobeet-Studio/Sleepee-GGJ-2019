@@ -85,17 +85,18 @@ public class PlayerControllerLinear : MonoBehaviour
         }
         else
         {
+            isCharging = false;
             if (isStop)
             {
-                isCharging = false;
                 StopCoroutine(charge());
                 if (Ischarge)
                 {
                     Debug.Log("Super carica");
                     rb.AddForce(chargePower * direction.normalized);
+                    currentAccelleration = chargePower;
                     Ischarge = false;
                 }
-                currentAccelleration = accelleration;
+                //currentAccelleration = accelleration;
                 isStop = false;
             }
         }
