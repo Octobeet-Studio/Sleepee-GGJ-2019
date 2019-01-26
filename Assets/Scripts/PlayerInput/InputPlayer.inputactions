@@ -1,0 +1,81 @@
+{
+    "name": "InputPlayer",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "92e670ad-c0fc-4fe4-ad91-2cb4ff799452",
+            "actions": [
+                {
+                    "name": "Movement",
+                    "id": "9ca08106-f8f6-4da0-938e-e45757b0334e",
+                    "expectedControlLayout": "Stick",
+                    "bindings": []
+                },
+                {
+                    "name": "Stop1",
+                    "id": "731ce2cf-845d-4494-a015-a82ddf9867cc",
+                    "expectedControlLayout": "Axis",
+                    "bindings": []
+                },
+                {
+                    "name": "Stop2",
+                    "id": "9c1579b9-17eb-44ab-b299-41d7de021032",
+                    "expectedControlLayout": "Axis",
+                    "bindings": []
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "Stick",
+                    "processors": "",
+                    "groups": ";GenericGamepad",
+                    "action": "Movement",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GenericGamepad",
+                    "action": "Stop1",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GenericGamepad",
+                    "action": "Stop2",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "GenericGamepad",
+            "basedOn": "",
+            "bindingGroup": "GenericGamepad",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": true,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

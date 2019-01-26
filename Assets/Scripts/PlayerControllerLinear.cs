@@ -1,16 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Input;
 
 public class PlayerControllerLinear : MonoBehaviour
 {
     [SerializeField]
-    float movementSpeed;
+    InputPlayer input;
 
     [SerializeField]
-    KeyCode up, down, right, left;
+    float accelleration;
+    [Range(0, 1)]
+    [SerializeField]
+    float rotationSpeed;
 
-    float speed;
+    float currenAccelleration;
 
     public float maxSpeed;
     Rigidbody2D rb;
@@ -18,37 +22,67 @@ public class PlayerControllerLinear : MonoBehaviour
     public AudioSource ObstaclesAudio;
     public VisionConeController visionConeController;
 
-    private void Start()
+    Vector2 direction;
+
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Start()
+    {
+        input.Player.Movement.performed += ctx => setDirection(ctx.ReadValue<Vector2>());
+        input.Player.Stop1.performed += ctx => stop(ctx.ReadValue<float>());
+        currenAccelleration = accelleration;
+    }
+
+    void stop(float axis)
+    {
+        if (axis > 0.8f)
+            currenAccelleration = 0;
+        else
+            currenAccelleration = accelleration;
+    }
+
     private void Update()
     {
-
+        
     }
 
     private void FixedUpdate()
     {
+        rb.AddForce(currenAccelleration * direction);
 
-        if (Input.GetKey(left))
-            rb.AddForce(movementSpeed * Vector2.left);
 
-        if (Input.GetKey(right))
-            rb.AddForce(movementSpeed * Vector2.right);
+        if (direction.x < 0.1f && direction.x > -0.1f && direction.y < 0.1f && direction.y > -0.1f)
+        {
+            if (visionConeController != null)
+                visionConeController.OpenCone();
+        }
 
-        if (Input.GetKey(up))
-            rb.AddForce(movementSpeed * Vector2.up);
 
-        if (Input.GetKey(down))
-            rb.AddForce(movementSpeed * Vector2.down);
-
-        if (Input.GetKeyUp(left) || Input.GetKeyUp(right) || Input.GetKeyUp(up) || Input.GetKeyUp(down))
-            visionConeController.OpenCone();
-
-        if(rb.velocity.magnitude >= maxSpeed)
+        if (rb.velocity.magnitude >= maxSpeed)
         {
             rb.velocity = rb.velocity * maxSpeed / rb.velocity.magnitude;
         }
+    }
+
+    void setDirection(Vector2 _direction)
+    {
+        if (_direction.x > 0.6f || _direction.x < -0.6f || _direction.y > 0.6f || _direction.y < -0.6f)
+        {
+            direction = Vector2.Lerp(direction, _direction, rotationSpeed);
+            //if (_direction.x > 0.6f || _direction.x < -0.6f || _direction.y > 0.6f || _direction.y < -0.6f)
+        }
+    }
+
+    private void OnEnable()
+    {
+        input.Enable();
+    }
+
+    private void OnDisable()
+    {
+        input.Disable();
     }
 }
