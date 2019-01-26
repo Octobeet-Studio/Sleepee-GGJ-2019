@@ -49,6 +49,7 @@ public class PlayerControllerLinear : MonoBehaviour
     private void Update()
     {
         HandleAnimation();
+        visionConeController.SetDirection(rb.velocity.normalized);
     }
 
     private void FixedUpdate()
