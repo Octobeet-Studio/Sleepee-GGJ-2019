@@ -190,11 +190,13 @@ public class PlayerControllerLinear : MonoBehaviour
         }
     }
 
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    Vector2 bounce = collision.GetContact(0).normal;
-    //    bounce *= /*rb.velocity.magnitude */ bounceDistance;
-    //    transform.position = new Vector3(transform.position.x + bounce.x, transform.position.y + bounce.y, transform.position.z);
-    //}
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Vector2 bounce = collision.GetContact(0).normal;
+        bounce *= bounceDistance;
+        transform.position = new Vector3(transform.position.x + bounce.x, transform.position.y + bounce.y, transform.position.z);
+        currentAccelleration = accelleration;
+        direction = Vector2.zero;
+    }
 
 }
