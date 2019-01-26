@@ -4,66 +4,72 @@ using UnityEngine;
 
 public class VisionConeController : MonoBehaviour
 {
-    public GameObject leftSprite;
-    public GameObject rightSprite;
+    public float openSpeed;
     public float closeSpeed;
-    public float angle;
+    public float maxRange;
+    public float minRange;
     public float openDelay;
+    public float closeDelay;
+    private Light spotLight;
 
-    bool open;
+    enum State
+    {
+        idle,
+        opening,
+        closing
+    }
+
+    private State state;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        spotLight = GetComponent<Light>();  
+        state = State.idle;
     }
 
     public void OpenCone()
     {
-        if (!open)
+        if (state == State.idle)
         {
-            open = true;
-            //leftSprite.transform.localRotation = Quaternion.Euler(0, 0, angle / 2);
-            //rightSprite.transform.localRotation = Quaternion.Euler(0, 0, -angle / 2);
+            state = State.opening;
             StartCoroutine(OpenConeCoroutine());
+        }
+    }
+
+    public void CloseCone()
+    {
+        if (state == State.opening)
+        {
+            state = State.closing;
+            StartCoroutine(CloseConeCoroutine());
         }
     }
 
     IEnumerator OpenConeCoroutine()
     {
-        Quaternion targetRotationLeft = Quaternion.Euler(0, 0, angle / 2);
-        Quaternion targetRotationRight = Quaternion.Euler(0, 0, -angle / 2);
-        Quaternion startRotation = Quaternion.identity;
-        float t = 0;
         yield return new WaitForSeconds(openDelay);
-        while (t < 1)
+        float t = 0;
+        while (t < 1 && state == State.opening)
         {
-            t += closeSpeed * Time.deltaTime;
-            leftSprite.transform.localRotation = Quaternion.Lerp(startRotation, targetRotationLeft, t);
-            rightSprite.transform.localRotation = Quaternion.Lerp(startRotation, targetRotationRight, t);
+            t += openSpeed * Time.deltaTime;
+            spotLight.range = Mathf.Lerp(minRange, maxRange, t);
             yield return null;
         }
-        StartCoroutine(CloseCone());
+        yield return new WaitForSeconds(closeDelay);
+        CloseCone();
     }
 
-    IEnumerator CloseCone()
+    IEnumerator CloseConeCoroutine()
     {
-        Quaternion startRotationLeft = leftSprite.transform.localRotation;
-        Quaternion startRotationRight = rightSprite.transform.localRotation;
-        Quaternion targetRotation = Quaternion.identity;
         float t = 0;
+        float initialRange = spotLight.range;
         while (t < 1)
         {
             t += closeSpeed * Time.deltaTime;
-            leftSprite.transform.localRotation = Quaternion.Lerp(startRotationLeft, targetRotation, t);
-            rightSprite.transform.localRotation = Quaternion.Lerp(startRotationRight, targetRotation, t);
+            spotLight.range = Mathf.Lerp(initialRange, minRange, t);
             yield return null;
         }
-        open = false;
+        state = State.idle;
     }
 }
