@@ -12,26 +12,43 @@ public class PlayerControllerLinear : MonoBehaviour
 
     float speed;
 
+    public float maxSpeed;
+    Rigidbody2D rb;
+
     public AudioSource ObstaclesAudio;
     public VisionConeController visionConeController;
 
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     private void Update()
     {
-        speed = movementSpeed * Time.deltaTime;
+
+    }
+
+    private void FixedUpdate()
+    {
 
         if (Input.GetKey(left))
-            transform.position += Vector3.left * speed;
+            rb.AddForce(movementSpeed * Vector2.left);
 
         if (Input.GetKey(right))
-            transform.position += Vector3.right * speed;
+            rb.AddForce(movementSpeed * Vector2.right);
 
         if (Input.GetKey(up))
-            transform.position += Vector3.up * speed;
+            rb.AddForce(movementSpeed * Vector2.up);
 
         if (Input.GetKey(down))
-            transform.position += Vector3.down * speed;
+            rb.AddForce(movementSpeed * Vector2.down);
 
         if (Input.GetKeyUp(left) || Input.GetKeyUp(right) || Input.GetKeyUp(up) || Input.GetKeyUp(down))
             visionConeController.OpenCone();
+
+        if(rb.velocity.magnitude >= maxSpeed)
+        {
+            rb.velocity = rb.velocity * maxSpeed / rb.velocity.magnitude;
+        }
     }
 }
