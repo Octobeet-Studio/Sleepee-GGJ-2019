@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Obstacles : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    AudioClip audioClip;
+    IPlayer player;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {   
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Verso della balena");
+            player = collision.gameObject.GetComponent<IPlayer>();
+            player.ObstaclesAudio.clip = audioClip;
+            player.ObstaclesAudio.Play();
+        }
     }
 }
