@@ -17,6 +17,8 @@ public class PlayerControllerLinear : MonoBehaviour
     float chargeTimer;
     [SerializeField]
     float chargePower;
+    [SerializeField]
+    float bounceDistance;
 
     float currentAccelleration;
 
@@ -102,7 +104,7 @@ public class PlayerControllerLinear : MonoBehaviour
             }
         }
 
-        if (rb.velocity.magnitude <= Vector2.one.magnitude * 0.1f)
+        if (rb.velocity.magnitude <= Vector2.one.magnitude * 0.1f  && stop1bool && stop2bool)
             visionConeController.OpenCone();
         else
             visionConeController.CloseCone();
@@ -187,5 +189,12 @@ public class PlayerControllerLinear : MonoBehaviour
             anim.SetBool("Idle", false);
         }
     }
+
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    Vector2 bounce = collision.GetContact(0).normal;
+    //    bounce *= /*rb.velocity.magnitude */ bounceDistance;
+    //    transform.position = new Vector3(transform.position.x + bounce.x, transform.position.y + bounce.y, transform.position.z);
+    //}
 
 }
