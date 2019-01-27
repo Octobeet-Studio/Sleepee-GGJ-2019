@@ -40,12 +40,13 @@ public class Timer : MonoBehaviour
         StartCoroutine(ScrollingImage());
         //UrinaLevel.fillAmount = 0.5f;
         yield return new WaitForSeconds(timer);
-        endGame();
+        BadendGame();
     }
 
-    void endGame()
+    void BadendGame()
     {
         if (opsText != null)
             opsText.gameObject.SetActive(true);
+
     }
 }

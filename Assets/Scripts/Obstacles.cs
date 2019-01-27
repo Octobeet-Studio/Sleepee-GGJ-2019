@@ -6,7 +6,7 @@ public class Obstacles : MonoBehaviour
 {
     [SerializeField]
     AudioClip audioClip;
-    IPlayer player;
+    PlayerControllerLinear player;
 
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -14,7 +14,7 @@ public class Obstacles : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Verso della balena");
-            player = collision.gameObject.GetComponent<IPlayer>();
+            player = collision.gameObject.GetComponent<PlayerControllerLinear>();
             player.ObstaclesAudio.clip = audioClip;
             player.ObstaclesAudio.Play();
         }

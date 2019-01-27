@@ -242,9 +242,12 @@ public class PlayerControllerLinear : MonoBehaviour
         if (!(stop1bool && stop2bool))
             currentAccelleration = accelleration;
         direction = Vector2.zero;
-        playerAudioSource.clip = playerHurtClips[Random.Range(0, playerHurtClips.Count)];
-        playerAudioSource.Play();
-        GameObject.Instantiate(hitPrefab, new Vector3(collision.GetContact(0).point.x, collision.GetContact(0).point.y, 0), Quaternion.identity);
+        if (playerHurtClips.Count > 0)
+            playerAudioSource.clip = playerHurtClips[Random.Range(0, playerHurtClips.Count)];
+        if (playerAudioSource.clip != null)    
+            playerAudioSource.Play();
+        if (hitPrefab != null)
+            GameObject.Instantiate(hitPrefab, new Vector3(collision.GetContact(0).point.x, collision.GetContact(0).point.y, 0), Quaternion.identity);
     }
 
 }
