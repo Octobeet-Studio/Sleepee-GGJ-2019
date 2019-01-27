@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7984313978766909272}
   - component: {fileID: 788770227521441651}
   - component: {fileID: 4992006266786598959}
+  - component: {fileID: 1931730956408886375}
   m_Layer: 0
   m_Name: tavolo_2_1 (1)
   m_TagString: Untagged
@@ -106,3 +107,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.693147}
   m_EdgeRadius: 0
+--- !u!114 &1931730956408886375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4264840523887512975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 395fa8a58894dea4c9cd5616444319b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 0}

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5849039509872919940}
   - component: {fileID: 8265596214963411274}
   - component: {fileID: 7468061591380005990}
+  - component: {fileID: 7042942445094612436}
   m_Layer: 0
   m_Name: sedia di lato
   m_TagString: Untagged
@@ -106,3 +107,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.75, y: 0.7029991}
   m_EdgeRadius: 0
+--- !u!114 &7042942445094612436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8132004642816442301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 395fa8a58894dea4c9cd5616444319b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 0}
