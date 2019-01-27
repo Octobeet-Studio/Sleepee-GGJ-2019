@@ -21,7 +21,7 @@ public class SelectLevel : MonoBehaviour
 
     public void Retry()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().ToString());
+        SceneManager.LoadScene("Level1");
     }
 
     public void Exit()

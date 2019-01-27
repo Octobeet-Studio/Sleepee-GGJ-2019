@@ -15,7 +15,8 @@ public class Timer : MonoBehaviour
     GameObject WinPanel;
     [SerializeField]
     List<AudioClip> alertAudioClips;
-    public AudioClip win, lose;
+    public AudioClip win, lose, menuMusic;
+    public AudioSource MainMusic;
 
     PlayerControllerLinear playerController;
     AudioSource audioSource;
@@ -67,6 +68,7 @@ public class Timer : MonoBehaviour
 
     void BadendGame()
     {
+        StartCoroutine(BadMusic());
         if (gameOverPanel != null)
         {
             Destroy(playerController);
@@ -74,14 +76,36 @@ public class Timer : MonoBehaviour
         }
     }
 
+    IEnumerator BadMusic()
+    {
+        while (MainMusic.isPlaying)
+        {
+            yield return null;
+        }
+        MainMusic.clip = lose;
+        MainMusic.Play();
+        MainMusic.loop = true;
+    }
+
     public void GoodEnd()
     {
+        MainMusic.Stop();
+        MainMusic.clip = win;
+        MainMusic.Play();
+        MainMusic.loop = true;
+        StartCoroutine(music());
         StopCoroutine(CountDown());
-        GetComponent<AudioSource>().Stop();
         if (WinPanel != null)
         {
             Destroy(playerController);
             WinPanel.gameObject.SetActive(true);
         }
+    }
+
+    IEnumerator music()
+    {
+        yield return new WaitForSeconds(win.length + 1);
+        MainMusic.clip = menuMusic;
+        MainMusic.Play();
     }
 }
