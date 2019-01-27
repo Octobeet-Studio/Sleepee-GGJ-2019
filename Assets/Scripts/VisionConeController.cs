@@ -10,10 +10,14 @@ public class VisionConeController : MonoBehaviour
     public float maxRange;
     public float minAngle;
     public float maxAngle;
+    //public float maxIntensity;
     public float openDelay;
     public float closeDelay;
     private Light spotLight;
     private Quaternion initialRotation;
+
+    float currentRange;
+    RaycastHit Hit;
 
     enum State
     {
@@ -31,6 +35,29 @@ public class VisionConeController : MonoBehaviour
         state = State.idle;
         initialRotation = transform.parent.rotation;
         gameObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        
+        //if (maxIntensity < 33 - currentRange)
+        //    spotLight.intensity = maxIntensity;
+        //else
+        //    spotLight.intensity = 33 - currentRange;
+
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out Hit, 10))
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * Hit.distance, Color.yellow);
+            if (Vector3.Distance(transform.position, Hit.point) < maxRange)
+                currentRange = Vector3.Distance(transform.position, Hit.point);
+            Debug.Log(currentRange);
+        }
+        else
+        {
+            currentRange  = maxRange;
+        }
+
+        spotLight.range = currentRange;
     }
 
     public void SetDirection(Vector2 direction)
@@ -62,12 +89,16 @@ public class VisionConeController : MonoBehaviour
 
     IEnumerator OpenConeCoroutine()
     {
+
         yield return new WaitForSeconds(openDelay);
         float t = 0;
         while (t < 1 && state == State.opening)
         {
             t += openSpeed * Time.deltaTime;
-            spotLight.range = Mathf.Lerp(minRange, maxRange, t);
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out Hit, 10))
+                currentRange = Mathf.Lerp(minRange, Hit.point.magnitude, t);
+            else
+                currentRange = Mathf.Lerp(minRange, maxRange, t);
             spotLight.spotAngle = Mathf.Lerp(minAngle, maxAngle, t);
             yield return null;
         }
@@ -76,11 +107,11 @@ public class VisionConeController : MonoBehaviour
     IEnumerator CloseConeCoroutine()
     {
         float t = 0;
-        float initialRange = spotLight.range;
+        float initialRange = currentRange;
         while (t < 1)
         {
             t += closeSpeed * Time.deltaTime;
-            spotLight.range = Mathf.Lerp(initialRange, minRange, t);
+            currentRange = Mathf.Lerp(initialRange, minRange, t);
             spotLight.spotAngle = Mathf.Lerp(maxAngle, minAngle, t);
             yield return null;
         }
