@@ -6,6 +6,7 @@ ScriptedImporter:
     11400002: Player/Movement
     11400004: Player/Stop1
     11400006: Player/Stop2
+    11400008: Player/Pause
   externalObjects: {}
   userData: 
   assetBundleName: 

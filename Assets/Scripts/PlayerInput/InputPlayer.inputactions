@@ -22,6 +22,12 @@
                     "id": "9c1579b9-17eb-44ab-b299-41d7de021032",
                     "expectedControlLayout": "Axis",
                     "bindings": []
+                },
+                {
+                    "name": "Pause",
+                    "id": "d486febe-6c10-46f5-9cb9-5a9d59fd4bc2",
+                    "expectedControlLayout": "Button",
+                    "bindings": []
                 }
             ],
             "bindings": [
@@ -56,6 +62,18 @@
                     "processors": "",
                     "groups": "GenericGamepad",
                     "action": "Stop2",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "",
+                    "path": "<Gamepad>/start",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": ";GenericGamepad",
+                    "action": "Pause",
                     "chainWithPrevious": false,
                     "isComposite": false,
                     "isPartOfComposite": false,

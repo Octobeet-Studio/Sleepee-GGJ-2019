@@ -26,17 +26,27 @@ public class PlayerControllerLinear : MonoBehaviour
     Rigidbody2D rb;
     Animator anim;
 
-    public AudioSource ObstaclesAudio;
+    public AudioSource ObstaclesAudio;    
     public VisionConeController visionConeController;
+    public GameObject hitPrefab;
+
+    AudioSource playerAudioSource;
+    public List<AudioClip> playerHurtClips;
+    public List<AudioClip> playerStepClips;
+    public float stepsFrequency;
+    private float timeFromLastStep;
+    public float animatorSpeedCoefficient;
 
     Vector2 direction;
 
     bool stop1bool, stop2bool, isStop, Ischarge, isCharging;
 
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        playerAudioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -44,7 +54,23 @@ public class PlayerControllerLinear : MonoBehaviour
         input.Player.Movement.performed += ctx => setDirection(ctx.ReadValue<Vector2>());
         input.Player.Stop1.performed += ctx => stop1(ctx.ReadValue<float>());
         input.Player.Stop2.performed += ctx => stop2(ctx.ReadValue<float>());
+        input.Player.Pause.performed += ctx => pause();
         currentAccelleration = accelleration;
+    }
+
+    bool _pause = false;
+    void pause()
+    {
+        if (!_pause)
+        {
+            Time.timeScale = 0;
+            _pause = true;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            _pause = false;
+        }
     }
 
     void stop1(float axis)
@@ -70,7 +96,10 @@ public class PlayerControllerLinear : MonoBehaviour
     private void Update()
     {
         HandleAnimation();
-        visionConeController.SetDirection(direction.normalized);
+        HandleStepsAudio();
+        if (_pause == false)
+            visionConeController.SetDirection(direction.normalized);
+
     }
 
     private void FixedUpdate()
@@ -158,6 +187,7 @@ public class PlayerControllerLinear : MonoBehaviour
     {
         if (rb.velocity.magnitude < 0.2)
         {
+            anim.speed = 0.5f;
             anim.SetBool("Horizontal", false);
             anim.SetBool("Down", false);
             anim.SetBool("Up", false);
@@ -169,6 +199,7 @@ public class PlayerControllerLinear : MonoBehaviour
             anim.SetBool("Down", false);
             anim.SetBool("Up", false);
             anim.SetBool("Idle", false);
+            anim.speed = rb.velocity.magnitude * animatorSpeedCoefficient;
             if (rb.velocity.x < 0)
                 transform.localScale = new Vector3(-1, 1, 1);
             else
@@ -180,6 +211,7 @@ public class PlayerControllerLinear : MonoBehaviour
             anim.SetBool("Down", false);
             anim.SetBool("Up", true);
             anim.SetBool("Idle", false);
+            anim.speed = rb.velocity.magnitude * animatorSpeedCoefficient;
         }
         else
         {
@@ -187,6 +219,18 @@ public class PlayerControllerLinear : MonoBehaviour
             anim.SetBool("Down", true);
             anim.SetBool("Up", false);
             anim.SetBool("Idle", false);
+            anim.speed = rb.velocity.magnitude * animatorSpeedCoefficient;
+        }
+    }
+
+    private void HandleStepsAudio()
+    {
+        timeFromLastStep += Time.deltaTime;
+        if(timeFromLastStep > 1 / (stepsFrequency *rb.velocity.magnitude) && rb.velocity.magnitude>0.2)
+        {
+            playerAudioSource.clip = playerStepClips[Random.Range(0, playerStepClips.Count)];
+            playerAudioSource.Play();
+            timeFromLastStep = 0;
         }
     }
 
@@ -195,8 +239,12 @@ public class PlayerControllerLinear : MonoBehaviour
         Vector2 bounce = collision.GetContact(0).normal;
         bounce *= bounceDistance;
         transform.position = new Vector3(transform.position.x + bounce.x, transform.position.y + bounce.y, transform.position.z);
-        currentAccelleration = accelleration;
+        if (!(stop1bool && stop2bool))
+            currentAccelleration = accelleration;
         direction = Vector2.zero;
+        playerAudioSource.clip = playerHurtClips[Random.Range(0, playerHurtClips.Count)];
+        playerAudioSource.Play();
+        GameObject.Instantiate(hitPrefab, new Vector3(collision.GetContact(0).point.x, collision.GetContact(0).point.y, 0), Quaternion.identity);
     }
 
 }
