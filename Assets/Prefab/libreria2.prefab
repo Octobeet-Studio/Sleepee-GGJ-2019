@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3870819970980703560}
   - component: {fileID: 3402732457677697983}
   - component: {fileID: 5187370167080134836}
+  - component: {fileID: 2871463348967880330}
   m_Layer: 0
   m_Name: libreria2
   m_TagString: Untagged
@@ -106,3 +107,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.266883, y: 0.32404423}
   m_EdgeRadius: 0
+--- !u!114 &2871463348967880330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431715377393920509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 395fa8a58894dea4c9cd5616444319b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 0616b53face56204cae27da4b58620ad, type: 3}
