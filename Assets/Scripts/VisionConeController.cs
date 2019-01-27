@@ -62,6 +62,7 @@ public class VisionConeController : MonoBehaviour
 
     public void SetDirection(Vector2 direction)
     {
+        if(direction != Vector2.zero)
         transform.parent.rotation = initialRotation * Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * 180 / Mathf.PI);
     }
 
