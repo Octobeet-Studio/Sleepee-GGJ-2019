@@ -12,9 +12,10 @@ public class Timer : MonoBehaviour
     [SerializeField]
     GameObject gameOverPanel;
     [SerializeField]
-    GameObject WinPanel, LosePanel;
+    GameObject WinPanel;
     [SerializeField]
     List<AudioClip> alertAudioClips;
+    public AudioClip win, lose;
 
     PlayerControllerLinear playerController;
     AudioSource audioSource;
@@ -75,6 +76,12 @@ public class Timer : MonoBehaviour
 
     public void GoodEnd()
     {
-        Debug.Log("Yeah");
+        StopCoroutine(CountDown());
+        GetComponent<AudioSource>().Stop();
+        if (WinPanel != null)
+        {
+            Destroy(playerController);
+            WinPanel.gameObject.SetActive(true);
+        }
     }
 }

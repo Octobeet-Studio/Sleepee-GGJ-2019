@@ -260,12 +260,17 @@ public class PlayerControllerLinear : MonoBehaviour
             playerAudioSource.Play();
         if (hitPrefab != null)
             GameObject.Instantiate(hitPrefab, new Vector3(collision.GetContact(0).point.x, collision.GetContact(0).point.y, 0), Quaternion.identity);
+        
+        stunned = true;
+        StartCoroutine(RecoverFromStun());
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         if (collision.gameObject.tag == "Win")
         {
             FindObjectOfType<Timer>().GoodEnd();
         }
-        stunned = true;
-        StartCoroutine(RecoverFromStun());
     }
 
     IEnumerator RecoverFromStun()

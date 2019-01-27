@@ -6,10 +6,7 @@ using UnityEngine.UI;
 public class SelectLevel : MonoBehaviour
 {
     string level = "Level1";
-    [SerializeField]
-    GameObject popUp;
     GameManager gameManager;
-    Button SelectLevelButton;
 
     private void Awake()
     {
@@ -30,5 +27,10 @@ public class SelectLevel : MonoBehaviour
     public void Exit()
     {
         Application.Quit();
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
