@@ -196,7 +196,7 @@ public class PlayerControllerLinear : MonoBehaviour
 
     private void OnDisable()
     {
-        input.Disable();
+        //input.Disable();
     }
 
     private void HandleAnimation()
