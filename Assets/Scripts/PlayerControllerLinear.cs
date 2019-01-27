@@ -248,6 +248,10 @@ public class PlayerControllerLinear : MonoBehaviour
             playerAudioSource.Play();
         if (hitPrefab != null)
             GameObject.Instantiate(hitPrefab, new Vector3(collision.GetContact(0).point.x, collision.GetContact(0).point.y, 0), Quaternion.identity);
+        if (collision.gameObject.tag == "Win")
+        {
+            FindObjectOfType<Timer>().GoodEnd();
+        }
     }
 
 }

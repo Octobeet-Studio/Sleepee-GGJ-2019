@@ -11,6 +11,12 @@ public class Timer : MonoBehaviour
     Image UrinaLevel;
     [SerializeField]
     Text opsText;
+    PlayerControllerLinear playerController;
+
+    private void Awake()
+    {
+        playerController = FindObjectOfType<PlayerControllerLinear>();
+    }
 
     private void Start()
     {
@@ -46,7 +52,14 @@ public class Timer : MonoBehaviour
     void BadendGame()
     {
         if (opsText != null)
+        {
+            Destroy(playerController);
             opsText.gameObject.SetActive(true);
+        }
+    }
 
+    public void GoodEnd()
+    {
+        Debug.Log("Yeah");
     }
 }
