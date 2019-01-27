@@ -7,7 +7,13 @@ public class SelectLevel : MonoBehaviour
     string level;
     [SerializeField]
     GameObject popUp;
-    
+    GameManager gameManager;
+
+    private void Awake()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
+
 
     public void OpenAndSetPopUp(int _level)
     {
@@ -17,6 +23,13 @@ public class SelectLevel : MonoBehaviour
 
     public void Play()
     {
+        gameManager.IsExploration = false;
+        SceneManager.LoadScene(level);
+    }
+
+    public void Exploration()
+    {
+        gameManager.IsExploration = true;
         SceneManager.LoadScene(level);
     }
 }

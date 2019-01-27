@@ -52,7 +52,7 @@ public class VisionConeController : MonoBehaviour
                 currentRange = Vector3.Distance(transform.position, Hit.point);
             Debug.Log(currentRange);
         }
-        else
+        else if (state != State.closing)
         {
             currentRange  = maxRange;
         }
