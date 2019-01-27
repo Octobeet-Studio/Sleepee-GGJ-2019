@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3305288659099839619}
   - component: {fileID: 3835169572081154568}
   - component: {fileID: 2682484782482413666}
+  - component: {fileID: 2526941249844244460}
   m_Layer: 0
   m_Name: albero_generico (7)
   m_TagString: Untagged
@@ -106,3 +107,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.70548874, y: 0.2030202}
   m_EdgeRadius: 0
+--- !u!114 &2526941249844244460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3809636611122081567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 395fa8a58894dea4c9cd5616444319b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 5e57eaffed193bd429a754cbcfe27994, type: 3}

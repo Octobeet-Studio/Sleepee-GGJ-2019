@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2608470166438700468}
   - component: {fileID: 2608470166438700475}
   - component: {fileID: 2608470166438700474}
+  - component: {fileID: 17132525616471699}
   m_Layer: 0
   m_Name: frigo
   m_TagString: Untagged
@@ -96,7 +97,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0}
     oldSize: {x: 1, y: 2.5625}
     newSize: {x: 1, y: 2.5625}
     adaptiveTilingThreshold: 0.5
@@ -106,3 +107,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 2.5625}
   m_EdgeRadius: 0
+--- !u!114 &17132525616471699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2608470166438700469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 395fa8a58894dea4c9cd5616444319b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: f31381037183c2440903f8f56a1abf1d, type: 3}
