@@ -171,13 +171,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 45
   UrinaLevel: {fileID: 6961811255599368294}
-  opsText: {fileID: 3678079086180741133}
+  gameOverPanel: {fileID: 3678079086180741171}
   WinPanel: {fileID: 0}
   LosePanel: {fileID: 0}
   alertAudioClips:
   - {fileID: 8300000, guid: 82da2c38e067edd459e15e1fd605967b, type: 3}
   - {fileID: 8300000, guid: 93c320d998468e2478f6bb0679e6cad0, type: 3}
   - {fileID: 8300000, guid: beacfc6e61c97cb4996aca7ce5cfa0a2, type: 3}
+  snoringAudioClip: {fileID: 0}
+  yawningAudioClip: {fileID: 0}
 --- !u!82 &2090236174
 AudioSource:
   m_ObjectHideFlags: 0

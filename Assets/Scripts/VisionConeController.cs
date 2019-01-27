@@ -19,14 +19,14 @@ public class VisionConeController : MonoBehaviour
     float currentRange;
     RaycastHit Hit;
 
-    enum State
+    public enum State
     {
         idle,
         opening,
         closing
     }
 
-    private State state;
+    public State state;
     
     // Start is called before the first frame update
     void Start()

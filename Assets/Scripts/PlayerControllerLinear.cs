@@ -33,10 +33,14 @@ public class PlayerControllerLinear : MonoBehaviour
     AudioSource playerAudioSource;
     public List<AudioClip> playerHurtClips;
     public List<AudioClip> playerStepClips;
+    [SerializeField]
+    AudioClip snoringAudioClip;
+    [SerializeField]
+    AudioClip yawningAudioClip;
     public float stepsFrequency;
     private float timeFromLastStep;
     public float animatorSpeedCoefficient;
-
+    private float timeStopped;
     Vector2 direction;
 
     bool stop1bool, stop2bool, isStop, Ischarge, isCharging, stunned;
@@ -136,8 +140,15 @@ public class PlayerControllerLinear : MonoBehaviour
             }
         }
 
-        if (rb.velocity.magnitude <= Vector2.one.magnitude * 0.1f  && stop1bool && stop2bool)
+        if (rb.velocity.magnitude <= Vector2.one.magnitude * 0.1f && stop1bool && stop2bool)
+        {
+            if (yawningAudioClip != null && visionConeController.state != VisionConeController.State.opening)
+            {
+                playerAudioSource.clip = yawningAudioClip;
+                playerAudioSource.Play();
+            }
             visionConeController.OpenCone();
+        }
         else
             visionConeController.CloseCone();
 
