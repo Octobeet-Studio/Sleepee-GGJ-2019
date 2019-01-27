@@ -39,8 +39,10 @@ public class PlayerControllerLinear : MonoBehaviour
 
     Vector2 direction;
 
-    bool stop1bool, stop2bool, isStop, Ischarge, isCharging;
+    bool stop1bool, stop2bool, isStop, Ischarge, isCharging, stunned;
 
+    [SerializeField]
+    private float stunDuration;
 
     private void Awake()
     {
@@ -59,6 +61,7 @@ public class PlayerControllerLinear : MonoBehaviour
     }
 
     bool _pause = false;
+
     void pause()
     {
         if (!_pause)
@@ -162,6 +165,8 @@ public class PlayerControllerLinear : MonoBehaviour
 
     void setDirection(Vector2 _direction)
     {
+        if (stunned)
+            return;
         if (_direction.x > 0.6f || _direction.x < -0.6f || _direction.y > 0.6f || _direction.y < -0.6f)
         {
             direction = Vector2.Lerp(direction, _direction, rotationSpeed);
@@ -187,7 +192,6 @@ public class PlayerControllerLinear : MonoBehaviour
     {
         if (rb.velocity.magnitude < 0.2)
         {
-            anim.speed = 0.5f;
             anim.SetBool("Horizontal", false);
             anim.SetBool("Down", false);
             anim.SetBool("Up", false);
@@ -199,7 +203,6 @@ public class PlayerControllerLinear : MonoBehaviour
             anim.SetBool("Down", false);
             anim.SetBool("Up", false);
             anim.SetBool("Idle", false);
-            anim.speed = rb.velocity.magnitude * animatorSpeedCoefficient;
             if (rb.velocity.x < 0)
                 transform.localScale = new Vector3(-1, 1, 1);
             else
@@ -211,7 +214,6 @@ public class PlayerControllerLinear : MonoBehaviour
             anim.SetBool("Down", false);
             anim.SetBool("Up", true);
             anim.SetBool("Idle", false);
-            anim.speed = rb.velocity.magnitude * animatorSpeedCoefficient;
         }
         else
         {
@@ -219,14 +221,13 @@ public class PlayerControllerLinear : MonoBehaviour
             anim.SetBool("Down", true);
             anim.SetBool("Up", false);
             anim.SetBool("Idle", false);
-            anim.speed = rb.velocity.magnitude * animatorSpeedCoefficient;
         }
     }
 
     private void HandleStepsAudio()
     {
         timeFromLastStep += Time.deltaTime;
-        if(timeFromLastStep > 1 / (stepsFrequency *rb.velocity.magnitude) && rb.velocity.magnitude>0.2)
+        if(timeFromLastStep > 1 / stepsFrequency && rb.velocity.magnitude>0.2)
         {
             playerAudioSource.clip = playerStepClips[Random.Range(0, playerStepClips.Count)];
             playerAudioSource.Play();
@@ -252,6 +253,14 @@ public class PlayerControllerLinear : MonoBehaviour
         {
             FindObjectOfType<Timer>().GoodEnd();
         }
+        stunned = true;
+        StartCoroutine(RecoverFromStun());
+    }
+
+    IEnumerator RecoverFromStun()
+    {
+        yield return new WaitForSeconds(stunDuration);
+        stunned = false;
     }
 
 }
