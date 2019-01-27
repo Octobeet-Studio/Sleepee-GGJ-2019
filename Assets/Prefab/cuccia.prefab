@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4262813391868521430}
   - component: {fileID: 4262813391868521431}
   - component: {fileID: 4262813391868521425}
+  - component: {fileID: 6061442206469885320}
   m_Layer: 0
   m_Name: cuccia
   m_TagString: Untagged
@@ -106,3 +107,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.90625, y: 0.88341475}
   m_EdgeRadius: 0
+--- !u!114 &6061442206469885320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4262813391868521428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 395fa8a58894dea4c9cd5616444319b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 7095a7d2c42138640b4a88ac7b27d871, type: 3}
