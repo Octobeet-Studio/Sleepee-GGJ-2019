@@ -26,8 +26,16 @@ public class PlayerControllerLinear : MonoBehaviour
     Rigidbody2D rb;
     Animator anim;
 
-    public AudioSource ObstaclesAudio;
+    public AudioSource ObstaclesAudio;    
     public VisionConeController visionConeController;
+    public GameObject hitPrefab;
+
+    AudioSource playerAudioSource;
+    public List<AudioClip> playerHurtClips;
+    public List<AudioClip> playerStepClips;
+    public float stepsFrequency;
+    private float timeFromLastStep;
+    public float animatorSpeedCoefficient;
 
     Vector2 direction;
 
@@ -37,6 +45,7 @@ public class PlayerControllerLinear : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        playerAudioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -70,7 +79,9 @@ public class PlayerControllerLinear : MonoBehaviour
     private void Update()
     {
         HandleAnimation();
+        HandleStepsAudio();
         visionConeController.SetDirection(direction.normalized);
+
     }
 
     private void FixedUpdate()
@@ -158,6 +169,7 @@ public class PlayerControllerLinear : MonoBehaviour
     {
         if (rb.velocity.magnitude < 0.2)
         {
+            anim.speed = 0.5f;
             anim.SetBool("Horizontal", false);
             anim.SetBool("Down", false);
             anim.SetBool("Up", false);
@@ -169,6 +181,7 @@ public class PlayerControllerLinear : MonoBehaviour
             anim.SetBool("Down", false);
             anim.SetBool("Up", false);
             anim.SetBool("Idle", false);
+            anim.speed = rb.velocity.magnitude * animatorSpeedCoefficient;
             if (rb.velocity.x < 0)
                 transform.localScale = new Vector3(-1, 1, 1);
             else
@@ -180,6 +193,7 @@ public class PlayerControllerLinear : MonoBehaviour
             anim.SetBool("Down", false);
             anim.SetBool("Up", true);
             anim.SetBool("Idle", false);
+            anim.speed = rb.velocity.magnitude * animatorSpeedCoefficient;
         }
         else
         {
@@ -187,6 +201,18 @@ public class PlayerControllerLinear : MonoBehaviour
             anim.SetBool("Down", true);
             anim.SetBool("Up", false);
             anim.SetBool("Idle", false);
+            anim.speed = rb.velocity.magnitude * animatorSpeedCoefficient;
+        }
+    }
+
+    private void HandleStepsAudio()
+    {
+        timeFromLastStep += Time.deltaTime;
+        if(timeFromLastStep > 1 / (stepsFrequency *rb.velocity.magnitude) && rb.velocity.magnitude>0.2)
+        {
+            playerAudioSource.clip = playerStepClips[Random.Range(0, playerStepClips.Count)];
+            playerAudioSource.Play();
+            timeFromLastStep = 0;
         }
     }
 
@@ -198,6 +224,9 @@ public class PlayerControllerLinear : MonoBehaviour
         if (!(stop1bool && stop2bool))
             currentAccelleration = accelleration;
         direction = Vector2.zero;
+        playerAudioSource.clip = playerHurtClips[Random.Range(0, playerHurtClips.Count)];
+        playerAudioSource.Play();
+        GameObject.Instantiate(hitPrefab, new Vector3(collision.GetContact(0).point.x, collision.GetContact(0).point.y, 0), Quaternion.identity);
     }
 
 }
