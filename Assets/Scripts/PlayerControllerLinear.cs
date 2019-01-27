@@ -40,7 +40,7 @@ public class PlayerControllerLinear : MonoBehaviour
     public float stepsFrequency;
     private float timeFromLastStep;
     public float animatorSpeedCoefficient;
-
+    private float timeStopped;
     Vector2 direction;
 
     bool stop1bool, stop2bool, isStop, Ischarge, isCharging, stunned;
