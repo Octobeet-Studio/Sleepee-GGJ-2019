@@ -8,6 +8,6 @@ public class MainMenu : MonoBehaviour
     private void Update()
     {
         if (Input.anyKey)
-            SceneManager.LoadScene("scena designer");
+            SceneManager.LoadScene("LevelSelect");
     }
 }

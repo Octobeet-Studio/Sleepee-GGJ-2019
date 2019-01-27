@@ -41,6 +41,7 @@ public class PlayerControllerLinear : MonoBehaviour
 
     bool stop1bool, stop2bool, isStop, Ischarge, isCharging;
 
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -53,7 +54,23 @@ public class PlayerControllerLinear : MonoBehaviour
         input.Player.Movement.performed += ctx => setDirection(ctx.ReadValue<Vector2>());
         input.Player.Stop1.performed += ctx => stop1(ctx.ReadValue<float>());
         input.Player.Stop2.performed += ctx => stop2(ctx.ReadValue<float>());
+        input.Player.Pause.performed += ctx => pause();
         currentAccelleration = accelleration;
+    }
+
+    bool _pause = false;
+    void pause()
+    {
+        if (!_pause)
+        {
+            Time.timeScale = 0;
+            _pause = true;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            _pause = false;
+        }
     }
 
     void stop1(float axis)
@@ -80,7 +97,8 @@ public class PlayerControllerLinear : MonoBehaviour
     {
         HandleAnimation();
         HandleStepsAudio();
-        visionConeController.SetDirection(direction.normalized);
+        if (_pause == false)
+            visionConeController.SetDirection(direction.normalized);
 
     }
 
