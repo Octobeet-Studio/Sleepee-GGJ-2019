@@ -10,11 +10,12 @@ public class Timer : MonoBehaviour
     [SerializeField]
     Image UrinaLevel;
     [SerializeField]
-    Text opsText;
+    GameObject gameOverPanel;
     [SerializeField]
     GameObject WinPanel, LosePanel;
     [SerializeField]
     List<AudioClip> alertAudioClips;
+
     PlayerControllerLinear playerController;
     AudioSource audioSource;
 
@@ -65,10 +66,10 @@ public class Timer : MonoBehaviour
 
     void BadendGame()
     {
-        if (opsText != null)
+        if (gameOverPanel != null)
         {
             Destroy(playerController);
-            opsText.gameObject.SetActive(true);
+            gameOverPanel.gameObject.SetActive(true);
         }
     }
 
