@@ -94,7 +94,6 @@ public class Timer : MonoBehaviour
         MainMusic.Stop();
         MainMusic.clip = win;
         MainMusic.Play();
-        MainMusic.loop = true;
         StartCoroutine(music());
         StopCoroutine(CountDown());
         if (WinPanel != null)
@@ -106,7 +105,8 @@ public class Timer : MonoBehaviour
 
     IEnumerator music()
     {
-        yield return new WaitForSeconds(win.length + 1);
+        yield return new WaitForSeconds(win.length + 0.2f);
+        MainMusic.loop = true;
         MainMusic.clip = menuMusic;
         MainMusic.Play();
     }
