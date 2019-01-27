@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2644648210267178318}
   - component: {fileID: 5611074986911508966}
   - component: {fileID: 8292968407845114509}
+  - component: {fileID: 8377696205949111589}
   m_Layer: 0
   m_Name: pianta_1
   m_TagString: Untagged
@@ -106,3 +107,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.26122314, y: 0.16436052}
   m_EdgeRadius: 0
+--- !u!114 &8377696205949111589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8062926443756430262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 395fa8a58894dea4c9cd5616444319b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: d6ff2a8b12eb7b24fb970a4c039eeaa4, type: 3}

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4641458028986152429}
   - component: {fileID: 4641458028986152428}
   - component: {fileID: 3224064764514444701}
+  - component: {fileID: 1094456427364314744}
   m_Layer: 0
   m_Name: modulo muro esterno
   m_TagString: Untagged
@@ -106,3 +107,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.22219849}
   m_EdgeRadius: 0
+--- !u!114 &1094456427364314744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4641458028986152431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 395fa8a58894dea4c9cd5616444319b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 0616b53face56204cae27da4b58620ad, type: 3}
