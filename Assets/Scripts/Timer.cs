@@ -11,6 +11,8 @@ public class Timer : MonoBehaviour
     Image UrinaLevel;
     [SerializeField]
     Text opsText;
+    [SerializeField]
+    GameObject WinPanel, LosePanel;
     PlayerControllerLinear playerController;
 
     private void Awake()
