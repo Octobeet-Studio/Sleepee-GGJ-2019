@@ -1821,7 +1821,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 303367639}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19, y: 6, z: 0}
+  m_LocalPosition: {x: 19, y: 7.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1899049611}
@@ -5983,6 +5983,7 @@ GameObject:
   - component: {fileID: 1031003834}
   - component: {fileID: 1031003836}
   - component: {fileID: 1031003835}
+  - component: {fileID: 1031003837}
   m_Layer: 0
   m_Name: poltrona
   m_TagString: Untagged
@@ -6078,6 +6079,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1031003837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031003833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 395fa8a58894dea4c9cd5616444319b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 0}
 --- !u!1001 &1032920163
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10108,7 +10122,7 @@ PrefabInstance:
     - target: {fileID: 426853275029953380, guid: 342224b05ea6f2849a82237617eef3ad,
         type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 342224b05ea6f2849a82237617eef3ad, type: 3}
@@ -11281,7 +11295,7 @@ PrefabInstance:
     - target: {fileID: 8643298235216485328, guid: 6307419d5c4320f4ba047ba4d30adfa8,
         type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 14
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8643298235216485328, guid: 6307419d5c4320f4ba047ba4d30adfa8,
         type: 3}
@@ -14815,7 +14829,7 @@ PrefabInstance:
     - target: {fileID: 1599560092287573798, guid: 1d2fbee32eb4251499a6a24d7b467aff,
         type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 25
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 1599560092287573798, guid: 1d2fbee32eb4251499a6a24d7b467aff,
         type: 3}
