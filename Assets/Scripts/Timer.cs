@@ -68,6 +68,7 @@ public class Timer : MonoBehaviour
 
     void BadendGame()
     {
+        audioSource.Stop();
         StartCoroutine(BadMusic());
         if (gameOverPanel != null)
         {
@@ -89,6 +90,7 @@ public class Timer : MonoBehaviour
 
     public void GoodEnd()
     {
+        audioSource.Stop();
         MainMusic.Stop();
         MainMusic.clip = win;
         MainMusic.Play();
