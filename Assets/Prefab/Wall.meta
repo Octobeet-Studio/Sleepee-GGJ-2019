@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Prefab/Wall.meta
 guid: 4f8646cf926ae914cb2b6182b515da2a
+=======
+guid: 3dac440abde454a4e942baf6b39dcb5a
+>>>>>>> 1dbc82749474b5647417052f1f548c7b45851460:Assets/Audio/BGM.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

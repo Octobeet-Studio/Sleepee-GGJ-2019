@@ -13,11 +13,15 @@ public class Timer : MonoBehaviour
     Text opsText;
     [SerializeField]
     GameObject WinPanel, LosePanel;
+    [SerializeField]
+    List<AudioClip> alertAudioClips;
     PlayerControllerLinear playerController;
+    AudioSource audioSource;
 
     private void Awake()
     {
         playerController = FindObjectOfType<PlayerControllerLinear>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -38,7 +42,15 @@ public class Timer : MonoBehaviour
         {
             t += Time.deltaTime;
             Debug.Log(t);
+            int prevIndex = Mathf.FloorToInt(UrinaLevel.fillAmount / 0.25f);
             UrinaLevel.fillAmount = t / timer;
+            int index = Mathf.FloorToInt(UrinaLevel.fillAmount / 0.25f);
+            if ( index > prevIndex && alertAudioClips.Count > 0 && prevIndex < alertAudioClips.Count-1)
+            {
+                print("INDEX: " + prevIndex);
+                audioSource.clip = alertAudioClips[prevIndex];
+                audioSource.Play();
+            }
             yield return null;
         }
     }

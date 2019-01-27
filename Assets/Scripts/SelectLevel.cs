@@ -1,24 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SelectLevel : MonoBehaviour
 {
-    string level;
+    string level = "Level1";
     [SerializeField]
     GameObject popUp;
     GameManager gameManager;
+    Button SelectLevelButton;
 
     private void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
-    }
-
-
-    public void OpenAndSetPopUp(int _level)
-    {
-        level = "Level" + _level.ToString();
-        popUp.SetActive(true);
     }
 
     public void Play()
@@ -27,9 +22,13 @@ public class SelectLevel : MonoBehaviour
         SceneManager.LoadScene(level);
     }
 
-    public void Exploration()
+    public void Retry()
     {
-        gameManager.IsExploration = true;
-        SceneManager.LoadScene(level);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().ToString());
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
     }
 }
